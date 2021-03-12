@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='VTEMExtract',
+    name='geotech',
     version='0.1',
     packages=[''],
     url='',
