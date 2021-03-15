@@ -1,23 +1,21 @@
-def create_kml(path):
+def create_kml(input_file):
     import csv
     data = []
 
-    file_name = path + '\\VTEMExtracted.csv'
-    # path = file_name.rsplit("\\", 1)[0]
-
-    # with open('VTEMExtracted.csv', newline='') as csvfile:
-    with open(file_name, newline='') as csvfile:
+    with open(input_file, newline='') as csvfile:
         data_file = csv.reader(csvfile, delimiter=' ')
         # data_file = csv.reader(csvfile)
         for row in data_file:
             data += row
 
-    #Skip the 1st header row.
+    # Skip the 1st header row.
     data = data[1:]
 
-    f = open(path + '\\' + 'Flightpath.kml', 'w')
+    file_out = input_file.rsplit("\\", 1)[0] + "\\Flightpath.kml"
 
-    #Writing the kml file.
+    f = open(file_out, 'w')
+
+    # Writing the kml file.
     f.write("<?xml version='1.0' encoding='UTF-8'?>\n")
     f.write("<kml xmlns='http://earth.google.com/kml/2.1'>\n")
     f.write("<Placemark>\n")
@@ -34,14 +32,10 @@ def create_kml(path):
     f.write("		<LineString>\n")
     f.write("			<altitudeMode>absolute</altitudeMode>\n")
     f.write("			<coordinates>\n")
-    # f.write("               ")
 
     space = " " * 24
 
     for row in data:
-        # f.write(str(row[3]) + "," + str(row[2]) + "," + str(row[4]) + " ")
-        # f.write(str(row.split(",")[3]) + "," + str(row.split(",")[2])
-        #         + "," + str(row.split(",")[4]) + " ")
         f.write(space + str(row.split(",")[3]) + "," + str(row.split(",")[2])
                 + "," + str(row.split(",")[4]) + "\n")
 
@@ -52,5 +46,5 @@ def create_kml(path):
     f.write("</Placemark>\n")
     f.write("</kml>")
 
-    print ("KML File Created. from {} line".format(str(len(data))))
+    print("KML File Created. from {} line".format(str(len(data))))
     f.close()
