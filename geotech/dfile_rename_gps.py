@@ -8,16 +8,11 @@ def dfile_rename_gps(input_files):
     :return:
     """
     from .d_name_utc import d_name_utc
-    # from .get_file import get_file
     from shutil import copyfile
-    from os import listdir
-    # file_path = get_file(input)
-    # new_files = []
-    # path = file_path.rsplit("\\", 1)[0]
-    # files = listdir(path)
-    input_files = [i for i in input_files if i.endswith(file_extension.replace("*", ""))]
-    input_files = [(path + '\\' + i) for i in input_files]
-    # files = [f for f in os.listdir('./my_dir') if f.endswith('.txt')]
+    # from os import listdir
+
+    # path = input_files[0].rsplit("\\", 1)[0]
+    new_files = []
     for file in input_files:
         file_time = int(file.rsplit("\\", 1)[1].replace(".", "")[5:9])
         utc = 9999
