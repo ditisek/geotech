@@ -3,7 +3,8 @@ from setuptools import setup
 setup(
     name='geotech',
     version='0.2',
-    packages=['geotech'],
+    packages=[''],
+    package_dir={'geotech'},
     url='',
     license='Free',
     author='David Strydom',
