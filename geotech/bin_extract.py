@@ -1,21 +1,8 @@
-def bin_extract():
+def bin_extract(input_file):
     import struct
-    import wx
-
-    def get_path(wildcard):
-        app = wx.App(None)
-        style = wx.FD_OPEN | wx.FD_FILE_MUST_EXIST
-        dialog = wx.FileDialog(None, 'Open', wildcard=wildcard, style=style)
-        if dialog.ShowModal() == wx.ID_OK:
-            path = dialog.GetPath()
-        else:
-            path = None
-        dialog.Destroy()
-        return path
-
 
     # Open the file for reading.
-    with open(get_path('*.bin'), 'rb') as infile:
+    with open(input_file, 'rb') as infile:
         data = infile.read()  # Read the contents of the file into memory.
         sbet_data = infile.read()
         print(infile.name)
