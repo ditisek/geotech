@@ -6,7 +6,7 @@ def gpsfile_rename_gps(input_files):
     data_bin = b''
     SYNC_BYTES = bytes.fromhex(' aa 44 12 ')
     filenameformat = "%02d_%02d %02d_%02d_%02d"
-    message_header = 'A1'
+    message_header = input_files[0][0:2]
 
     bin_files = input_files
 
