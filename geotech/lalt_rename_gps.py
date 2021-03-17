@@ -11,28 +11,28 @@ def lalt_rename_gps(input_files, new_date):
 
     new_files = []
     for file in input_files:
-        file_time = int(file.rsplit("\\", 1)[1].replace(".", "")[5:9])
+        file_time = int(file.rsplit("\\", 1)[1].replace("_", "")[5:9])
         utc = 9999
         with open(file, 'r') as infile:
             data = infile.read().split('\n')
         for index, row in enumerate(data):
             row_split = row.split(",")
             if row.startswith('$GPGGA'):
-                utc = int(row_split[1][0:4])
+                utc = row_split[1][0:4]
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.d")
+                                 "." + str(utc)[2:4] + ".00.log")
                 break
             if (file_time - 10) <= utc <= (file_time + 10):
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.d")
+                                 "." + str(utc)[2:4] + ".00.log")
                 break
             if utc < 9999:
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.d")
+                                 "." + str(utc)[2:4] + ".00.log")
                 break
         if utc == 9999:
             new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                             "." + str(utc)[2:4] + ".00.d")
+                             "." + str(utc)[2:4] + ".00.log")
 
     output_file_name = input_files[0].rsplit('\\', 1)[0] + "\\file_list.txt"
     file_write = open(output_file_name, 'w')
