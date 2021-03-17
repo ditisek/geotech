@@ -1,17 +1,14 @@
-def dfile_rename_gps(input_files, new_date):
+def lalt_rename_gps(input_files, new_date):
     """
     Make a copy of the data-files with the correct UTC timestamp
     as extracted from the first GPS string
 
     :param file_extension: File extension in dot format
-        Default is .d
+        Default is .log
     :return:
     """
-    # from .d_name_utc import d_name_utc
     from shutil import copyfile
-    # from os import listdir
 
-    # path = input_files[0].rsplit("\\", 1)[0]
     new_files = []
     for file in input_files:
         file_time = int(file.rsplit("\\", 1)[1].replace(".", "")[5:9])
@@ -22,20 +19,19 @@ def dfile_rename_gps(input_files, new_date):
             row_split = row.split(",")
             if row.startswith('$GPGGA'):
                 utc = int(row_split[1][0:4])
-                new_files.append(new_date + " " + str(utc)[0:2] + \
+                new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
                                  "." + str(utc)[2:4] + ".00.d")
                 break
-            # if utc == (file_time):
             if (file_time - 10) <= utc <= (file_time + 10):
-                new_files.append(new_date + " " + str(utc)[0:2] + \
+                new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
                                  "." + str(utc)[2:4] + ".00.d")
                 break
             if utc < 9999:
-                new_files.append(new_date + " " + str(utc)[0:2] + \
+                new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
                                  "." + str(utc)[2:4] + ".00.d")
                 break
         if utc == 9999:
-            new_files.append(new_date + " " + str(utc)[0:2] + \
+            new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
                              "." + str(utc)[2:4] + ".00.d")
 
     output_file_name = input_files[0].rsplit('\\', 1)[0] + "\\file_list.txt"

@@ -23,3 +23,4 @@ from .gps_conv import gps_conv
 from .create_kst import create_kst
 from .gpsfile_rename_gps import gpsfile_rename_gps
 from .add_laser import add_laser
+from .lalt_rename_gps import lalt_rename_gps
