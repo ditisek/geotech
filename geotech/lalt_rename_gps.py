@@ -20,19 +20,19 @@ def lalt_rename_gps(input_files, new_date):
             if row.startswith('$GPGGA'):
                 utc = row_split[1][0:4]
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.log")
+                                 "_" + str(utc)[2:4] + "_00.log")
                 break
             if (file_time - 10) <= utc <= (file_time + 10):
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.log")
+                                 "_" + str(utc)[2:4] + "_00.log")
                 break
             if utc < 9999:
                 new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                                 "." + str(utc)[2:4] + ".00.log")
+                                 "_" + str(utc)[2:4] + "_00.log")
                 break
         if utc == 9999:
             new_files.append('LALT ' + new_date + " " + str(utc)[0:2] + \
-                             "." + str(utc)[2:4] + ".00.log")
+                             "_" + str(utc)[2:4] + "_00.log")
 
     output_file_name = input_files[0].rsplit('\\', 1)[0] + "\\file_list.txt"
     file_write = open(output_file_name, 'w')
