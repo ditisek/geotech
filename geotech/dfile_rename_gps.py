@@ -20,7 +20,7 @@ def dfile_rename_gps(input_files, new_date):
             data = infile.read().split('\n')
         for index, row in enumerate(data):
             row_split = row.split(",")
-            if row.startswith('$GPGGA'):
+            if row.startswith('$GPGGA') and row.split(',')[2] != '':
                 utc = int(row_split[1][0:4])
                 new_files.append(new_date + " " + str(utc)[0:2] + \
                                  "." + str(utc)[2:4] + ".00.d")
